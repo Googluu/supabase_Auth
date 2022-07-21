@@ -1,5 +1,10 @@
 import { Heading, Stack, FormControl, FormLabel, Input, Button } from '@chakra-ui/react'
+import { supabase } from '../api/supabaseClient'
 import useForm from '../hooks/useForm'
+
+import { signUpWithEmail, updateProfile } from '../services/auth'
+
+
 
 const initialState = {
     fullname: '',
@@ -12,9 +17,18 @@ const SignUpForm = () => {
     const { formValues, handleInputChange } = useForm(initialState)
     const { fullname, email, password } = formValues
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formValues)
+       const { fullname, email, password } = formValues
+       const result = await signUpWithEmail({ email, password })
+       if(result){
+        const user = supabase.auth.user()
+        const data = {
+            id: user.id,
+            full_name: fullname
+        }
+        await updateProfile(data)
+       }
     }
 
     return(
