@@ -1,5 +1,6 @@
 import { Heading, Stack, FormControl, FormLabel, Input, Button } from '@chakra-ui/react'
 import useForm from '../hooks/useForm'
+import { signInWithMagicLink } from '../services/auth'
 
 
 const MagicLinkForm = () => {
@@ -7,9 +8,10 @@ const MagicLinkForm = () => {
     const { formValues, handleInputChange } = useForm({ email: '' })
     const { email } = formValues
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formValues)
+        const result = await signInWithMagicLink(email)
+        console.log(result)
     }
 
 

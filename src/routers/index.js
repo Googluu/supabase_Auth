@@ -6,7 +6,7 @@ const AppRouter = () => {
     return(
         <Routes>    
             <Route path='/' element={<Welcome />} />
-            <Route path='/login' element={<Auth />} />
+            <Route path='login' element={<Auth />} />
         </Routes>
     )
 }

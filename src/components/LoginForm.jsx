@@ -1,6 +1,8 @@
 import { Heading, Stack, FormControl, FormLabel, Input, Button } from '@chakra-ui/react'
-import { FcGoogle } from 'react-icons/fc'
+import { AiFillGithub } from 'react-icons/ai'
 import useForm from '../hooks/useForm'
+
+import { signInWithEmail, signInWithGithub } from '../services/auth'
 
 const initialState = {
     email: '',
@@ -13,9 +15,13 @@ const LoginForm = () => {
     const { formValues, handleInputChange } = useForm(initialState)
     const { email, password } = formValues
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formValues)
+        await signInWithEmail(formValues)
+    }
+
+    const handleSubmitWithGithub = async () => {
+        await signInWithGithub()
     }
 
     return(
@@ -44,8 +50,8 @@ const LoginForm = () => {
                 </FormControl>
             <Button type='submit' colorScheme='blue'>Login</Button>
 
-            <Button leftIcon={<FcGoogle />} variant='outline'>
-                Sign in with Google
+            <Button leftIcon={<AiFillGithub />} variant='outline' onClick={handleSubmitWithGithub}>
+                Sign in with Github
             </Button>
             </Stack>
         </form>
