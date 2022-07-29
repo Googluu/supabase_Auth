@@ -30,16 +30,16 @@ export const signInWithEmail = async (data) => {
     return result
 }
 
-export const signInWithMagicLink = async (email) => {
-    let result;
-    try {
-        result = await supabase.auth.signIn({email})
-        return result
-    } catch (error) {
-        console.error(error)
-    }
-    return result
-}
+// export const signInWithMagicLink = async (email) => {
+//     let result;
+//     try {
+//         result = await supabase.auth.signIn({email})
+//         return result
+//     } catch (error) {
+//         console.error(error)
+//     }
+//     return result
+// }
 
 export const signInWithGithub = async () => {
     try {
